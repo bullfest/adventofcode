@@ -13,43 +13,47 @@ def add_l(s, val):
         return s + val
     return [add_l(s[0], val), s[1]]
 
+
 def add_r(s, val):
     if isinstance(s, int):
         return s + val
     return [s[0], add_r(s[1], val)]
 
-def explode(s, depth = 0):
-    #if isinstance(s, int):
+
+def explode(s, depth=0):
+    # if isinstance(s, int):
     #    return None, s, None
     if depth >= 3:
         if isinstance(s[0], list):
             return s[0][0], [0, add_l(s[1], s[0][1])], None
-        if isinstance(s[1], list): 
+        if isinstance(s[1], list):
             return None, [add_r(s[0], s[1][0]), 0], s[1][1]
     if isinstance(s[0], list):
-        l, val, r = explode(s[0], depth+1)   
+        l, val, r = explode(s[0], depth + 1)
         if val:
             if r:
                 return l, [val, add_l(s[1], r)], None
             return l, [val, s[1]], None
     if isinstance(s[1], list):
-        l, val, r = explode(s[1], depth+1)   
+        l, val, r = explode(s[1], depth + 1)
         if val:
             if l:
-                return None, [add_r(s[0], l), val], r 
+                return None, [add_r(s[0], l), val], r
             return None, [s[0], val], r
     return None, None, None
+
 
 def split(s):
     if isinstance(s, int):
         if s > 9:
-            return [s//2, s - (s//2)]
+            return [s // 2, s - (s // 2)]
         return None
     if s0 := split(s[0]):
         return [s0, s[1]]
     if s1 := split(s[1]):
         return [s[0], s1]
     return None
+
 
 def reduce(s_num):
     while True:
@@ -63,13 +67,15 @@ def reduce(s_num):
         s_num = ret
     return s_num
 
+
 def add(s1, s2):
     return [s1, s2]
+
 
 def magnitude(l):
     if isinstance(l, int):
         return l
-    return magnitude(l[0])*3 + magnitude(l[1])*2
+    return magnitude(l[0]) * 3 + magnitude(l[1]) * 2
 
 
 if __name__ == "__main__":

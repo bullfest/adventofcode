@@ -8,24 +8,29 @@ from typing import List, Tuple
 from dataclasses import dataclass
 from collections import defaultdict
 
+
 @dataclass
 class Elem:
     value: int
     depth: int
 
+
 def parse(l):
     num = []
+
     def rec_parse(l, depth):
         if isinstance(l[0], int):
             num.append(Elem(l[0], depth))
         else:
-            rec_parse(l[0], depth+1)
+            rec_parse(l[0], depth + 1)
         if isinstance(l[1], int):
             num.append(Elem(l[1], depth))
         else:
-            rec_parse(l[1], depth+1)
+            rec_parse(l[1], depth + 1)
+
     rec_parse(l, 1)
     return num
+
 
 def add(l1, l2):
     l1 = copy.deepcopy(l1)
@@ -35,36 +40,41 @@ def add(l1, l2):
         e.depth += 1
     return l1
 
+
 def test_add():
-    assert add(parse([1,2]),parse([3,4])) == parse([[1,2],[3,4]])
+    assert add(parse([1, 2]), parse([3, 4])) == parse([[1, 2], [3, 4]])
+
 
 def explode(l):
-    for i in range(len(l)-1):
-        if l[i].depth > 4 and l[i].depth == l[i+1].depth:
+    for i in range(len(l) - 1):
+        if l[i].depth > 4 and l[i].depth == l[i + 1].depth:
             if i > 0:
-                l[i-1].value += l[i].value
-            if i+2 < len(l):
-                l[i+2].value += l[i+1].value
-            del l[i+1]
+                l[i - 1].value += l[i].value
+            if i + 2 < len(l):
+                l[i + 2].value += l[i + 1].value
+            del l[i + 1]
             l[i].value = 0
             l[i].depth -= 1
             return l
     return False
 
+
 def test_explode():
-    assert explode(parse([[[[[9,8],1],2],3],4])) == parse([[[[0,9],2],3],4])
-    assert not explode(parse([[[[0,9],2],3],4])) 
-    assert explode(parse([7,[6,[5,[4,[3,2]]]]])) == parse([7,[6,[5,[7,0]]]]) 
+    assert explode(parse([[[[[9, 8], 1], 2], 3], 4])) == parse([[[[0, 9], 2], 3], 4])
+    assert not explode(parse([[[[0, 9], 2], 3], 4]))
+    assert explode(parse([7, [6, [5, [4, [3, 2]]]]])) == parse([7, [6, [5, [7, 0]]]])
+
 
 def split(l):
     for i in range(len(l)):
         if l[i].value >= 10:
-            e1 = Elem(l[i].value//2, l[i].depth+1)
-            e2 = Elem(l[i].value - l[i].value//2, l[i].depth+1)
+            e1 = Elem(l[i].value // 2, l[i].depth + 1)
+            e2 = Elem(l[i].value - l[i].value // 2, l[i].depth + 1)
             l[i] = e1
-            l.insert(i+1, e2)
+            l.insert(i + 1, e2)
             return l
     return False
+
 
 def reduce(l):
     while True:
@@ -73,6 +83,7 @@ def reduce(l):
         if not split(l):
             break
     return l
+
 
 def reconstruct(l):
     stack = []
@@ -94,9 +105,7 @@ def reconstruct(l):
 def magnitude(l):
     if isinstance(l, int):
         return l
-    return magnitude(l[0])*3 + magnitude(l[1])*2
-
-
+    return magnitude(l[0]) * 3 + magnitude(l[1]) * 2
 
 
 if __name__ == "__main__":
@@ -109,7 +118,7 @@ if __name__ == "__main__":
         s = reduce(s)
     ans1 = magnitude(reconstruct(s))
     print("1:", ans1)
-    
+
     ans2 = 0
     for s1, s2 in itertools.product(snail_nums, snail_nums):
         s = add(s1, s2)

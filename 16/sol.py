@@ -16,10 +16,7 @@ lines = [l.strip() for l in sys.stdin]
 assert len(lines) == 1
 binary = []
 
-hex_to_bin = {
-    c: list(map(int,bin(int('1'+c,16))[3:]))
-    for c in "0123456789ABCDEF"
-}
+hex_to_bin = {c: list(map(int, bin(int("1" + c, 16))[3:])) for c in "0123456789ABCDEF"}
 
 for c in lines[0]:
     binary += hex_to_bin[c]

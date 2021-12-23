@@ -77,7 +77,8 @@ def neighbours(x, y, diagonal=False):
 lines = [l.strip() for l in sys.stdin]
 sections = get_sections(lines)
 
-x_min, x_max, y_min, y_max = map(int,lines[0].split())
+x_min, x_max, y_min, y_max = map(int, lines[0].split())
+
 
 def test_trajectory(dx, dy):
     x, y = 0, 0
@@ -85,23 +86,24 @@ def test_trajectory(dx, dy):
     while True:
         x += dx
         y += dy
-        #print(x,y, dx, dy)
+        # print(x,y, dx, dy)
         if dx > 0:
             dx -= 1
         dy -= 1
         maxi_y = max(y, maxi_y)
-        #print("maxis", x_min, x , x_max, y_min, y, y_max,
+        # print("maxis", x_min, x , x_max, y_min, y, y_max,
         #      x_min <= x <= x_max and y_max <= y <= y_min)
         if x_min <= x <= x_max and y_min <= y <= y_max:
             return maxi_y
-        if y < y_min  or x > x_max:
+        if y < y_min or x > x_max:
             return None
 
-#assert 3 == test_trajectory(7,2)
-#assert 6 == test_trajectory(6,3)
-#assert 0 == test_trajectory(9,0)
-#assert test_trajectory(17,-4) is None
-#assert 45 == test_trajectory(6,9)
+
+# assert 3 == test_trajectory(7,2)
+# assert 6 == test_trajectory(6,3)
+# assert 0 == test_trajectory(9,0)
+# assert test_trajectory(17,-4) is None
+# assert 45 == test_trajectory(6,9)
 
 if len(sections) > 1:
     for l in sections[1]:
@@ -129,7 +131,7 @@ for dx in range(0, 150):
         if (ans := test_trajectory(dx, dy)) is not None:
             if dx == 0:
                 print("???", dy)
-            #print(dx,dy,ans)
+            # print(dx,dy,ans)
             solutions.append((dx, dy))
             ans1 = max(ans1, ans)
 

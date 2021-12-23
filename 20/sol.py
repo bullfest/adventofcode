@@ -33,7 +33,7 @@ def get_grid(lines, f=None, sep=None):
 def print_grid(g):
     for l in transpose(g):
         print("".join(l))
-        #print("".join(map(lambda n: "#" if n == 1 else ".", l)))
+        # print("".join(map(lambda n: "#" if n == 1 else ".", l)))
     print()
 
 
@@ -64,28 +64,31 @@ sections = get_sections(lines)
 enhance_alg = "".join(sections[0])
 mappy = get_grid(sections[1])
 
+
 def pixel_value(m, x, y, outside):
     bits = []
-    for dy in (-1,0,1):
-        for dx in (-1,0,1):
-            if x+dx < 0 or y+dy < 0 or x+dx >= len(m) or y+dy >= len(m[0]):
+    for dy in (-1, 0, 1):
+        for dx in (-1, 0, 1):
+            if x + dx < 0 or y + dy < 0 or x + dx >= len(m) or y + dy >= len(m[0]):
                 bits.append(outside)
                 continue
-            c = m[x+dx][y+dy]
+            c = m[x + dx][y + dy]
             if c == ".":
                 bits.append(0)
             elif c == "#":
                 bits.append(1)
-    #print(bits)
-    n = int("".join(map(str,bits)), 2)
+    # print(bits)
+    n = int("".join(map(str, bits)), 2)
     return enhance_alg[n]
 
+
 def enhance(m, outside):
-    new_m = [[0]*(len(m[0])+2) for _ in range(len(m)+2)]
+    new_m = [[0] * (len(m[0]) + 2) for _ in range(len(m) + 2)]
     for x in range(len(new_m)):
         for y in range(len(new_m[0])):
-            new_m[x][y] = pixel_value(m, x-1, y-1, outside)
+            new_m[x][y] = pixel_value(m, x - 1, y - 1, outside)
     return new_m
+
 
 odd_outside = 1 if enhance_alg[0] == "#" else 0
 
