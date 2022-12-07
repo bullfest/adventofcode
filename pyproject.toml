@@ -5,12 +5,13 @@ description = ""
 authors = ["Alexander Viklund <alexander.viklund@trioptima.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.10"
 q = "^2.6"
 black = "^21.12b0"
 requests = "^2.26.0"
 aocd = "^0.1"
 pytest = "^6.2.5"
+ortools = "^9.2.9972"
 
 [tool.poetry.dev-dependencies]
 
