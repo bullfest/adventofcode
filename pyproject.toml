@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "aoc2021"
+name = "adventofcode"
 version = "0.1.0"
 description = ""
 authors = ["Alexander Viklund <alexander.viklund@trioptima.com>"]

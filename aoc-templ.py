@@ -1,17 +1,22 @@
+#!/usr/bin/env python3
 import sys
+import re
 import q
 import itertools as it
 import math
+import aocd
 from typing import List, Tuple
 from dataclasses import dataclass
 from collections import defaultdict
 
 
 def transpose(m):
+    """[[1, 2], [3, 4]] -> [[1, 3], [2, 4]]"""
     return list(map(list, zip(*m)))
 
 
 def get_sections(lines):
+    """Split lines on empty lines"""
     sections = []
     section = []
     for l in lines:
@@ -24,8 +29,12 @@ def get_sections(lines):
     sections.append(section)
     return sections
 
+def parse_ints(*l):
+    return list(map(int, l))
+
 
 def get_grid(lines, f=None, sep=None):
+    """ """
     f = f or (lambda x: x)
     return transpose([list(map(f, l if sep is None else l.split(sep))) for l in lines])
 
@@ -75,11 +84,26 @@ def neighbours(x, y, diagonal=False):
         l.append((x, y + 1))
     return l
 
+if len(sys.argv) > 1:
+    filename = sys.argv[1]
+    with open(filename) as file:
+        lines = [l.strip('\n') for l in file]
+else:
+    filename = "input"
+    lines = aocd.get_data().split("\n")
 
-lines = [l.strip() for l in sys.stdin]
-
+print("len(lines)", len(lines))
 ans1 = 0
 ans2 = 0
 
 print("1:", ans1)
 print("2:", ans2)
+
+if filename == "input":
+    submit = input("submit?")
+    if 'y' in submit.lower():
+        if ans1 != 0:
+            aocd.submit(ans1, part="a")
+        if ans2 != 0:
+            aocd.submit(ans2, part="b")
+
