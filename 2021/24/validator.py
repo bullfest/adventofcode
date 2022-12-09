@@ -3,6 +3,7 @@ from typing import List, Tuple
 from dataclasses import dataclass
 from collections import defaultdict
 
+
 def get_sections(lines):
     sections = []
     section = []
@@ -16,6 +17,7 @@ def get_sections(lines):
     sections.append(section)
     return sections
 
+
 @dataclass
 class Inp:
     inp: str
@@ -23,12 +25,14 @@ class Inp:
 
     def next(this):
         this.i += 1
-        return this.inp[this.i-1]
+        return this.inp[this.i - 1]
+
 
 @dataclass
 class Instr:
     operation: str
     args: List[str]
+
 
 lines = [l.strip() for l in sys.stdin]
 sections = get_sections(lines)
@@ -38,9 +42,8 @@ inputs = [Inp(l) for l in sections[1]]
 instructions = []
 
 for l in i_lines:
-    instructions.append(
-        Instr(l.split()[0], l.split()[1:])
-    )
+    instructions.append(Instr(l.split()[0], l.split()[1:]))
+
 
 def run(inp):
     state = defaultdict(lambda: 0)
@@ -81,6 +84,7 @@ def run(inp):
             else:
                 state[instr.args[0]] = 0
     return state
+
 
 for inp in inputs:
     state = run(inp)

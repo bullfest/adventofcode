@@ -25,7 +25,7 @@ def get_grid(lines, f=None, sep=None):
 
 def print_grid(g):
     for l in transpose(g):
-        #print(l)
+        # print(l)
         print("".join(map(lambda n: "X" if n else ".", l)))
     print()
 
@@ -50,7 +50,7 @@ def points_to_grid(points, default_value=False, point_value=True):
 if len(sys.argv) > 1:
     filename = sys.argv[1]
     with open(filename) as file:
-        lines = [l.strip('\n') for l in file]
+        lines = [l.strip("\n") for l in file]
 else:
     filename = "input"
     lines = aocd.get_data(year=2022, day=8).split("\n")
@@ -61,7 +61,7 @@ ans2 = 0
 
 trees = get_grid(lines, f=int)
 print(lines)
-visible = [[False]*len(trees[0]) for _ in range(len(trees))]
+visible = [[False] * len(trees[0]) for _ in range(len(trees))]
 
 
 for x in range(len(trees)):
@@ -70,7 +70,6 @@ for x in range(len(trees)):
         if trees[x][y] > m:
             visible[x][y] = True
         m = max(trees[x][y], m)
-            
 
     m = -1
     for y in reversed(range(len(trees[x]))):
@@ -94,12 +93,13 @@ for y in range(len(trees[0])):
             visible[x][y] = True
         m = max(trees[x][y], m)
 
+
 def ss(x0, y0):
     l = []
     m = trees[x0][y0]
     s = 0
     # print("D")
-    for y in range(y0+1, len(trees[0])):
+    for y in range(y0 + 1, len(trees[0])):
         s += 1
         if trees[x0][y] >= m:
             break
@@ -107,7 +107,7 @@ def ss(x0, y0):
     s = 0
 
     # print("U")
-    for y in range(y0-1, -1, -1):
+    for y in range(y0 - 1, -1, -1):
         s += 1
         if trees[x0][y] >= m:
             break
@@ -115,7 +115,7 @@ def ss(x0, y0):
     s = 0
 
     # print("R")
-    for x in range(x0+1, len(trees)):
+    for x in range(x0 + 1, len(trees)):
         s += 1
         if trees[x][y0] >= m:
             break
@@ -123,7 +123,7 @@ def ss(x0, y0):
     s = 0
 
     # print("L")
-    for x in range(x0-1, -1, -1):
+    for x in range(x0 - 1, -1, -1):
         s += 1
         if trees[x][y0] >= m:
             break
@@ -132,9 +132,10 @@ def ss(x0, y0):
     for v in l:
         s *= v
     if s > 8:
-        print(x0,y0, l,s)
+        print(x0, y0, l, s)
     return s
-    
+
+
 for l in visible:
     for v in l:
         if v:
@@ -142,15 +143,14 @@ for l in visible:
 
 for x in range(len(trees)):
     for y in range(len(trees)):
-        ans2 = max(ans2, ss(x,y))
+        ans2 = max(ans2, ss(x, y))
 print("1:", ans1)
 print("2:", ans2)
 
 if filename == "input":
     submit = input("submit?")
-    if 'y' in submit.lower():
+    if "y" in submit.lower():
         if ans1 != 0:
             aocd.submit(ans1, year=2022, day=8, part="a")
         if ans2 != 0:
             aocd.submit(ans2, year=2022, day=8, part="b")
-

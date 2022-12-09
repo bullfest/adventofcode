@@ -30,8 +30,10 @@ def get_sections(lines):
     sections.append(section)
     return sections
 
+
 def parse_ints(*l):
     return list(map(int, l))
+
 
 def get_grid(lines, f=None, sep=None):
     """ """
@@ -84,14 +86,15 @@ def neighbours(x, y, diagonal=False):
         l.append((x, y + 1))
     return l
 
+
 def parse_stacks(s):
     idxs = list(map(int, s[-1].split()))
     stacks = [list() for _ in range(len(idxs))]
     for line in reversed(s[:-1]):
         for i, c in enumerate(line):
-            if not ('A' <= c <= 'Z'):
+            if not ("A" <= c <= "Z"):
                 continue
-            stacks[i//4].append(c)
+            stacks[i // 4].append(c)
     print(stacks)
     return stacks
 
@@ -99,7 +102,7 @@ def parse_stacks(s):
 if len(sys.argv) > 1:
     filename = sys.argv[1]
     with open(filename) as file:
-        lines = [l.strip('\n') for l in file]
+        lines = [l.strip("\n") for l in file]
     print(lines)
 else:
     filename = "input"
@@ -119,19 +122,19 @@ for move in moves:
     f = int(f)
     t = int(t)
     for _ in range(n):
-        item = stacks[f-1].pop()
-        stacks[t-1].append(item)
-    
+        item = stacks[f - 1].pop()
+        stacks[t - 1].append(item)
+
 ans1 = "".join([s[-1] for s in stacks])
 
 stacks = os
 
 for move in moves:
     _, n, _, f, _, t = move.split()
-    n, f, t = parse_ints(n,f,t)
-    items = stacks[f-1][-n:]
-    stacks[f-1] = stacks[f-1][:-n]
-    stacks[t-1] += items
+    n, f, t = parse_ints(n, f, t)
+    items = stacks[f - 1][-n:]
+    stacks[f - 1] = stacks[f - 1][:-n]
+    stacks[t - 1] += items
 ans2 = "".join([s[-1] for s in stacks])
 
 print("1:", ans1)
@@ -139,9 +142,8 @@ print("2:", ans2)
 
 if filename == "input":
     submit = input("submit?")
-    if 'y' in submit.lower():
+    if "y" in submit.lower():
         if ans1 != 0:
             aocd.submit(ans1, part="a")
         if ans2 != 0:
             aocd.submit(ans2, part="b")
-

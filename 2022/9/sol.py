@@ -13,7 +13,7 @@ from collections import defaultdict
 if len(sys.argv) > 1:
     filename = sys.argv[1]
     with open(filename) as file:
-        lines = [l.strip('\n') for l in file]
+        lines = [l.strip("\n") for l in file]
 else:
     filename = "input"
     lines = aocd.get_data(year=2022, day=9).split("\n")
@@ -23,6 +23,7 @@ ans1 = 0
 ans2 = 0
 
 visited = set()
+
 
 @dataclass
 class Point:
@@ -38,9 +39,9 @@ class Point:
             self.y += 1
         if d == "D":
             self.y -= 1
-    
+
     def follow(self, h: "Point"):
-        if abs(self.x - h.x) <= 1 and abs(self.y-h.y) <= 1:
+        if abs(self.x - h.x) <= 1 and abs(self.y - h.y) <= 1:
             return
         if self.x == h.x:
             if self.y < h.y:
@@ -90,7 +91,7 @@ for move in lines:
     for _ in range(c):
         rope[0].step(d)
         for i in range(9):
-            rope[i+1].follow(rope[i])
+            rope[i + 1].follow(rope[i])
         t = rope[-1]
         visited2.add((t.x, t.y))
 
@@ -101,9 +102,8 @@ print("2:", ans2)
 
 if filename == "input":
     submit = input("submit?")
-    if 'y' in submit.lower():
+    if "y" in submit.lower():
         if ans1 != 0:
             aocd.submit(ans1, year=2022, day=9, part="a")
         if ans2 != 0:
             aocd.submit(ans2, year=2022, day=9, part="b")
-

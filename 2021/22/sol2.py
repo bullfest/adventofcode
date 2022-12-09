@@ -76,7 +76,7 @@ class Cube:
         a = 1
         for i in range(3):
             a *= this.p1[i] - this.p0[i] + 1
-        return a*this.sign
+        return a * this.sign
 
     @property
     def x(this):
@@ -104,6 +104,7 @@ class Cube:
 
         return Cube(p0, p1, -c1.sign)
 
+
 def from_op(op):
     x = op.x
     y = op.y
@@ -118,7 +119,7 @@ cubes = set()
 # Negacubes https://www.reddit.com/r/adventofcode/comments/rlxhmg/comment/hplbfaz/?utm_source=reddit&utm_medium=web2x&context=3
 for op in inst:
     cube = from_op(op)
-    for c in set(cubes): # copy to iterate
+    for c in set(cubes):  # copy to iterate
         if o := c.overlap(cube):
             cubes.add(o)
     if op.op == "on":

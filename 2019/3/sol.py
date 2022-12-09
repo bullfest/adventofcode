@@ -80,7 +80,7 @@ def neighbours(x, y, diagonal=False):
 if __name__ == "__main__":
     lines = [l.strip().split(",") for l in sys.stdin]
     visited = [dict(), dict()]
-    
+
     for c in range(2):
         xp, yp = 0, 0
         steps = 0

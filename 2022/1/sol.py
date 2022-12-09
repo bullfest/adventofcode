@@ -78,13 +78,14 @@ def neighbours(x, y, diagonal=False):
         l.append((x, y + 1))
     return l
 
+
 lines = [l.strip() for l in sys.stdin]
 elves = get_sections(lines)
 sums = []
 for e in elves:
     sums.append(sum(map(int, e)))
 sums.sort()
-     
+
 
 ans1 = sums[-1]
 ans2 = sum(sums[-3:])

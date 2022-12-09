@@ -29,6 +29,7 @@ def get_sections(lines):
     sections.append(section)
     return sections
 
+
 def parse_ints(*l):
     return list(map(int, l))
 
@@ -84,10 +85,11 @@ def neighbours(x, y, diagonal=False):
         l.append((x, y + 1))
     return l
 
+
 if len(sys.argv) > 1:
     filename = sys.argv[1]
     with open(filename) as file:
-        lines = [l.strip('\n') for l in file]
+        lines = [l.strip("\n") for l in file]
 else:
     filename = "input"
     lines = aocd.get_data().split("\n")
@@ -104,9 +106,9 @@ for i, c in enumerate(line[3:], start=4):
         ans1 = i
         break
     last = last[1:] + [c]
-    
+
 for i, c in enumerate(line[13:], start=14):
-    last = set(c for c in line[i-14:i])
+    last = set(c for c in line[i - 14 : i])
     if len(last) == 14:
         print(last, c)
         ans2 = i
@@ -125,9 +127,8 @@ print("2:", ans3)
 
 if filename == "input":
     submit = input("submit?")
-    if 'y' in submit.lower():
+    if "y" in submit.lower():
         if ans1 != 0:
             aocd.submit(ans1, part="a")
         if ans2 != 0:
             aocd.submit(ans2, part="b")
-

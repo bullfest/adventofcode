@@ -80,6 +80,7 @@ def neighbours(x, y, diagonal=False):
         l.append((x, y + 1))
     return l
 
+
 if len(sys.argv) == 1:
     filename = "input"
 else:
@@ -95,11 +96,11 @@ ans1 = 0
 ans2 = 0
 
 for l in lines:
-    e = list(map(int,re.split(",|-", l)))
-    e1 = set(range(e[0],e[1]+1))
-    e2 = set(range(e[2],e[3]+1))
+    e = list(map(int, re.split(",|-", l)))
+    e1 = set(range(e[0], e[1] + 1))
+    e2 = set(range(e[2], e[3] + 1))
     overlap = e1 & e2
-    if e2 <= e1  or e1 <= e2:
+    if e2 <= e1 or e1 <= e2:
         ans1 += 1
     if overlap:
         ans2 += 1
@@ -109,9 +110,8 @@ print("2:", ans2)
 
 if filename == "input":
     submit = input("submit?")
-    if 'y' in submit.lower():
+    if "y" in submit.lower():
         if ans1 != 0:
             aocd.submit(ans1, part="a")
         if ans2 != 0:
             aocd.submit(ans2, part="b")
-

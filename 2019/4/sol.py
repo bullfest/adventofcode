@@ -77,28 +77,30 @@ def neighbours(x, y, diagonal=False):
         l.append((x, y + 1))
     return l
 
+
 def next(n):
     n = list(n)
-    for i in range(len(n)-1, -1, -1):
+    for i in range(len(n) - 1, -1, -1):
         if n[i] < 9:
             n[i] += 1
             break
         else:
             n[i] = 0
 
-    for i in range(len(n)-1):
-        if n[i] > n[i+1]:
+    for i in range(len(n) - 1):
+        if n[i] > n[i + 1]:
             for i2 in range(i, len(n)):
                 n[i2] = n[i]
             break
 
     return tuple(n)
 
+
 def smallest_double(n):
     c = 1
     sm = 1000
-    for i in range(len(n)-1):
-        if n[i] == n[i+1]:
+    for i in range(len(n) - 1):
+        if n[i] == n[i + 1]:
             c += 1
         else:
             if c > 1:
@@ -109,6 +111,7 @@ def smallest_double(n):
     if sm != 1000:
         return sm
     return 0
+
 
 if __name__ == "__main__":
     lines = [l.strip() for l in sys.stdin]

@@ -79,6 +79,7 @@ def neighbours(x, y, diagonal=False):
         l.append((x, y + 1))
     return l
 
+
 lines = [l.strip().split() for l in sys.stdin]
 beats = {"X": "C", "Y": "A", "Z": "B"}
 draw = {"X": "A", "Y": "B", "Z": "C"}
@@ -101,17 +102,16 @@ loose = {v: k for k, v in loose.items()}
 ans2 = 0
 for l in lines:
     op, me = l
-    if me == "X": # loose
+    if me == "X":  # loose
         choice = loose[op]
         ans2 += cscore[choice]
-    if me == "Y": # draw
+    if me == "Y":  # draw
         choice = draw[op]
         ans2 += 3 + cscore[choice]
-    if me == "Z": # win
+    if me == "Z":  # win
         choice = beat[op]
         ans2 += 6 + cscore[choice]
-    
+
 
 print("1:", ans1)
 print("2:", ans2)
-

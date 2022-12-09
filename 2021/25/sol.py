@@ -80,16 +80,19 @@ lines = [l.strip() for l in sys.stdin]
 cukes = get_grid(lines)
 max_x = len(cukes)
 max_y = len(cukes[0])
-downs = {(x,y) for x in range(max_x) for y in range(max_y) if cukes[x][y] == "v"}
-rights = {(x,y) for x in range(max_x) for y in range(max_y) if cukes[x][y] == ">"}
+downs = {(x, y) for x in range(max_x) for y in range(max_y) if cukes[x][y] == "v"}
+rights = {(x, y) for x in range(max_x) for y in range(max_y) if cukes[x][y] == ">"}
+
 
 def right(p):
     x, y = p
-    return (x+1)%max_x, y
+    return (x + 1) % max_x, y
+
 
 def down(p):
     x, y = p
-    return x, (y+1)%max_y
+    return x, (y + 1) % max_y
+
 
 ans1 = 0
 moved = True

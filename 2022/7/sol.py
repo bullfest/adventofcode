@@ -30,6 +30,7 @@ def get_sections(lines):
     sections.append(section)
     return sections
 
+
 def parse_ints(*l):
     return list(map(int, l))
 
@@ -85,10 +86,11 @@ def neighbours(x, y, diagonal=False):
         l.append((x, y + 1))
     return l
 
+
 if len(sys.argv) > 1:
     filename = sys.argv[1]
     with open(filename) as file:
-        lines = [l.strip('\n') for l in file]
+        lines = [l.strip("\n") for l in file]
 else:
     filename = "input"
     lines = aocd.get_data().split("\n")
@@ -99,6 +101,7 @@ ans2 = 0
 
 ds = []
 
+
 @dataclass
 class Node:
     name: str
@@ -106,11 +109,11 @@ class Node:
     children: Dict = dataclasses.field(default_factory=dict)
     size: int = None
     _size_m = None
-    
+
     def add_child(self, n: "Node"):
         if n.name not in self.children:
             self.children[n.name] = n
-    
+
     def r_size(self):
         if self._size_m is not None:
             return self._size_m
@@ -122,7 +125,7 @@ class Node:
         ds.append(s)
         self._size_m = s
         return s
-    
+
     def dir_sizes_smaller_than(self, i: int):
         s = 0
         for n in self.children.values():
@@ -132,7 +135,6 @@ class Node:
         if self._size_m < i:
             s += self._size_m
         return s
-        
 
 
 h = Node(name="/", parent=None)
@@ -162,7 +164,7 @@ for l in lines:
         size = int(size)
         n = Node(name=name, parent=curr, size=size)
         curr.add_child(n)
-            
+
 free_space = 70000000 - h.r_size()
 ans1 = h.dir_sizes_smaller_than(100000)
 needed_space = 30000000 - free_space
@@ -172,16 +174,15 @@ ds.sort()
 for i in ds:
     if i < needed_space:
         continue
-    ans2 =i
+    ans2 = i
     break
 print("1:", ans1)
 print("2:", ans2)
 
 if filename == "input":
     submit = input("submit?")
-    if 'y' in submit.lower():
+    if "y" in submit.lower():
         if ans1 != 0:
             aocd.submit(ans1, part="a")
         if ans2 != 0:
             aocd.submit(ans2, part="b")
-
