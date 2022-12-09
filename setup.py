@@ -4,6 +4,7 @@ import argparse
 import os
 import shutil
 import aocd
+import subprocess
 from datetime import date
 
 parser = argparse.ArgumentParser()
@@ -22,3 +23,5 @@ except:
 
 shutil.copy("aoc-templ.py", f"{year}/{day}/sol.py")
 
+subprocess.call(["sed", f"{year}/{day}/sol.py", "-i", "-e", f"s/<<DAY>>/{day}/"])
+subprocess.call(["sed", f"{year}/{day}/sol.py", "-i", "-e", f"s/<<YEAR>>/{year}/"])

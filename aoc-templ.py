@@ -84,18 +84,26 @@ def neighbours(x, y, diagonal=False):
         l.append((x, y + 1))
     return l
 
+year=<<YEAR>>
+day=<<DAY>>
+
 if len(sys.argv) > 1:
     filename = sys.argv[1]
     with open(filename) as file:
         lines = [l.strip('\n') for l in file]
 else:
     filename = "input"
-    lines = aocd.get_data().split("\n")
+    lines = aocd.get_data(year=year, day=day).split("\n")
 
 print("len(lines)", len(lines))
 ans1 = 0
 ans2 = 0
+############
+# SOLUTION #
+############
 
+
+###########
 print("1:", ans1)
 print("2:", ans2)
 
@@ -103,7 +111,6 @@ if filename == "input":
     submit = input("submit?")
     if 'y' in submit.lower():
         if ans1 != 0:
-            aocd.submit(ans1, part="a")
+            aocd.submit(ans1, year=year, day=day, part="a")
         if ans2 != 0:
-            aocd.submit(ans2, part="b")
-
+            aocd.submit(ans2, year=year, day=day, part="b")
