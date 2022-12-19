@@ -150,26 +150,41 @@ for l in lines:
 
 
 @functools.cache
-def solve1(time: int, pos: str, open: FrozenSet[str]) -> int:
+def solve_original(time: int, pos: str, open: FrozenSet[str]) -> int:
+    """This is what my original solution that gave me a Rank 35 on the global leaderboard looked like"""
     if time <= 0:
         return 0
     best = 0
-    best_open = open
+    curr_valve = valves[pos]
+    if pos not in open and curr_valve.flow_rate != 0:
+        best = max(
+            best,
+            solve_original(time - 1, pos, open.union({pos}))
+            + (time - 1) * curr_valve.flow_rate,
+        )
+    for n in curr_valve.tunnels:
+        best = max(best, solve_original(time - 1, n, open))
+    return best
+
+
+@functools.cache
+def solve1(time: int, pos: str, open: FrozenSet[str]) -> int:
+    """This is an optimized solution for part1 after I completed part 2"""
+    if time <= 0:
+        return 0
+    best = 0
     curr_valve = valves[pos]
     for next_pos, d in curr_valve.abbr_tunnels.items():
         new_time = time - d - 1
         if next_pos not in open and new_time > 0:
             next_valve = valves[next_pos]
-            score, this_open = solve1(new_time, next_pos, open.union({pos}))
+            score = solve1(new_time, next_pos, open.union({pos}))
             score += next_valve.flow_rate * new_time
-            if score > best:
-                best = score
-                best_open = this_open
-
-    return best, best_open
+            best = max(best, score)
+    return best
 
 
-ans1, _ = solve1(30, "AA", frozenset())
+ans1 = solve1(30, "AA", frozenset())
 t1 = datetime.datetime.now()
 print("1:", ans1, "dt", t1 - t0, "t1", t1.isoformat())
 
