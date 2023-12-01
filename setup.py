@@ -8,7 +8,7 @@ import subprocess
 from datetime import date
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--day", type=int)
+parser.add_argument("--day", type=int, required=True)
 parser.add_argument("--year", type=int, default=date.today().year)
 
 args = parser.parse_args()
