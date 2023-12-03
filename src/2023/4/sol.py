@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import sys
 import re
+
+import aoclib
 import q
 import itertools as it
 import math
@@ -10,9 +12,25 @@ from dataclasses import dataclass
 from collections import defaultdict
 
 
+def set_max_x(n: int):
+    global max_x
+    max_x = aoclib.max_x = n
 
-year=2023
-day=4
+
+def set_max_y(n: int):
+    global max_y
+    max_y = aoclib.max_y = n
+
+
+def flib_x_y():
+    global max_x, max_y
+    max_x, max_y = max_y, max_x
+    aoclib.max_x = max_x
+    aoclib.max_y = max_y
+
+
+year = << YEAR >>
+day = << DAY >>
 
 if len(sys.argv) > 1:
     filename = sys.argv[1]
@@ -23,8 +41,14 @@ else:
     lines = aocd.get_data(year=year, day=day).split("\n")
 
 print("len(lines)", len(lines))
+print("len(lines[0])", len(lines[0]))
+
 ans1 = 0
 ans2 = 0
+
+set_max_x(len(lines))
+set_max_y(len(lines[0]))
+
 ############
 # SOLUTION #
 ############

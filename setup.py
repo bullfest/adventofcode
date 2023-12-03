@@ -23,5 +23,8 @@ except:
 
 shutil.copy("aoc-templ.py", f"src/{year}/{day}/sol.py")
 
+subprocess.call(["touch", f"src/{year}/__init__.py"])
+subprocess.call(["touch", f"src/{year}/{day}/__init__.py"])
+
 subprocess.call(["sed", f"src/{year}/{day}/sol.py", "-i", "-e", f"s/<<DAY>>/{day}/"])
 subprocess.call(["sed", f"src/{year}/{day}/sol.py", "-i", "-e", f"s/<<YEAR>>/{year}/"])
