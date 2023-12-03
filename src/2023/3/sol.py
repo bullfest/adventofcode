@@ -1,29 +1,7 @@
 #!/usr/bin/env python3
 import sys
+import aoclib
 import aocd
-
-
-def neighbours(x, y, diagonal=False):
-    l = []
-    if x > 0:
-        l.append((x - 1, y))
-        if y > 0 and diagonal:
-            l.append((x - 1, y - 1))
-        if y + 1 < max_y and diagonal:
-            l.append((x - 1, y + 1))
-    if y > 0:
-        l.append((x, y - 1))
-
-    if x + 1 < max_x:
-        l.append((x + 1, y))
-        if y > 0 and diagonal:
-            l.append((x + 1, y - 1))
-        if y + 1 < max_y and diagonal:
-            l.append((x + 1, y + 1))
-    if y + 1 < max_y:
-        l.append((x, y + 1))
-    return l
-
 
 year = 2023
 day = 3
@@ -50,7 +28,7 @@ max_y = len(lines[0])
 
 
 def has_symbol_neighbour(i, j):
-    for x, y in neighbours(i, j, diagonal=True):
+    for x, y in aoclib.neighbours(i, j, diagonal=True):
         if lines[x][y] not in non_symbols:
             return True
     return False
@@ -70,7 +48,7 @@ def read_number(i, j):
 
 def prod_neighbour_numbers(i, j):
     numbers = set()
-    for x, y in neighbours(i, j, diagonal=True):
+    for x, y in aoclib.neighbours(i, j, diagonal=True):
         if lines[x][y].isdigit():
             numbers.add(read_number(x, y))
     if len(numbers) == 2:
