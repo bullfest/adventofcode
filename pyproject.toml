@@ -3,6 +3,9 @@ name = "adventofcode"
 version = "0.1.0"
 description = ""
 authors = ["Alexander Viklund <alexander.viklund@trioptima.com>"]
+packages = [
+    { include ="aoclib", from = "src"}
+]
 
 [tool.poetry.dependencies]
 python = "^3.11"

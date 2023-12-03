@@ -15,17 +15,32 @@ else:
     lines = aocd.get_data(year=year, day=day).split("\n")
 
 print("len(lines)", len(lines))
+print("len(lines[0])", len(lines[0]))
 ans1 = 0
 ans2 = 0
+def set_max_x(n: int):
+    global max_x
+    max_x = aoclib.max_x = n
+
+
+def set_max_y(n: int):
+    global max_y
+    max_y = aoclib.max_y = n
+
+def flib_x_y():
+    global max_x, max_y
+    max_x, max_y = max_y, max_x
+    aoclib.max_x = max_x
+    aoclib.max_y = max_y
+
+set_max_x(len(lines))
+set_max_y(len(lines[0]))
 ############
 # SOLUTION #
 ############
 
 
 non_symbols = {".", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"}
-max_x = len(lines[0])
-max_y = len(lines[0])
-
 
 def has_symbol_neighbour(i, j):
     for x, y in aoclib.neighbours(i, j, diagonal=True):
@@ -42,7 +57,6 @@ def read_number(i, j):
     while j < max_y - 1 and lines[i][j + 1].isdigit():
         j += 1
         d += lines[i][j]
-    print(d)
     return int(d)
 
 

@@ -1,3 +1,7 @@
+
+max_x = None
+max_y = None
+
 def transpose(m):
     """[[1, 2], [3, 4]] -> [[1, 3], [2, 4]]"""
     return list(map(list, zip(*m)))

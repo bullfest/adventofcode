@@ -16,12 +16,12 @@ day = args.day
 year = args.year
 
 try:
-    os.makedirs(f"{year}/{day}")
+    os.makedirs(f"src/{year}/{day}")
 except:
     print("Day already created")
     exit(1)
 
-shutil.copy("aoc-templ.py", f"{year}/{day}/sol.py")
+shutil.copy("aoc-templ.py", f"src/{year}/{day}/sol.py")
 
-subprocess.call(["sed", f"{year}/{day}/sol.py", "-i", "-e", f"s/<<DAY>>/{day}/"])
-subprocess.call(["sed", f"{year}/{day}/sol.py", "-i", "-e", f"s/<<YEAR>>/{year}/"])
+subprocess.call(["sed", f"src/{year}/{day}/sol.py", "-i", "-e", f"s/<<DAY>>/{day}/"])
+subprocess.call(["sed", f"src/{year}/{day}/sol.py", "-i", "-e", f"s/<<YEAR>>/{year}/"])
