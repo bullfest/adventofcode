@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import functools
 import sys
 import re
 
@@ -29,8 +30,8 @@ def flib_x_y():
     aoclib.max_y = max_y
 
 
-year = << YEAR >>
-day = << DAY >>
+year = 2023
+day = 4
 
 if len(sys.argv) > 1:
     filename = sys.argv[1]
@@ -52,6 +53,30 @@ set_max_y(len(lines[0]))
 ############
 # SOLUTION #
 ############
+
+win_cards = []
+cards = []
+
+for l in lines:
+    w, c = l.split(":")[1].split("|")
+    w = w.strip()
+    win_cards.append(aoclib.parse_ints(*w.strip().split()))
+    cards.append(aoclib.parse_ints(*c.strip().split()))
+
+@functools.cache
+def score(i):
+    if i >= len(cards):
+        return 0
+    n = len(set(win_cards[i]).intersection(cards[i]))
+    if n:
+        ans = 1 + sum(map(score,range(i+1,i+n+1)))
+    else:
+        ans = 1
+    return ans
+
+
+for i in range(len(lines)):
+    ans2 += score(i)
 
 
 ###########

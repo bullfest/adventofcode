@@ -29,15 +29,15 @@ def flib_x_y():
     aoclib.max_y = max_y
 
 
-year = << YEAR >>
-day = << DAY >>
+year = <<YEAR>>
+day = <<DAY>>
 
 if len(sys.argv) > 1:
     filename = sys.argv[1]
     with open(filename) as file:
         lines = [l.strip('\n') for l in file]
 else:
-    filename = "input"
+    filename = None
     lines = aocd.get_data(year=year, day=day).split("\n")
 
 print("len(lines)", len(lines))
@@ -58,7 +58,7 @@ set_max_y(len(lines[0]))
 print("1:", ans1)
 print("2:", ans2)
 
-if filename == "input":
+if filename is None:
     submit = input("submit?")
     if 'y' in submit.lower():
         if ans1 != 0:
