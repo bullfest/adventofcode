@@ -22,7 +22,7 @@ def set_max_y(n: int):
     max_y = aoclib.max_y = n
 
 
-def flib_x_y():
+def flip_x_y():
     global max_x, max_y
     max_x, max_y = max_y, max_x
     aoclib.max_x = max_x

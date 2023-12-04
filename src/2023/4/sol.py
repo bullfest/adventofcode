@@ -23,7 +23,7 @@ def set_max_y(n: int):
     max_y = aoclib.max_y = n
 
 
-def flib_x_y():
+def flip_x_y():
     global max_x, max_y
     max_x, max_y = max_y, max_x
     aoclib.max_x = max_x
@@ -63,20 +63,21 @@ for l in lines:
     win_cards.append(aoclib.parse_ints(*w.strip().split()))
     cards.append(aoclib.parse_ints(*c.strip().split()))
 
-@functools.cache
 def score(i):
-    if i >= len(cards):
-        return 0
     n = len(set(win_cards[i]).intersection(cards[i]))
-    if n:
-        ans = 1 + sum(map(score,range(i+1,i+n+1)))
-    else:
-        ans = 1
-    return ans
+    if n == 0:
+        return 0
+    return 2**(n-1)
+
+@functools.cache
+def n_cards(i):
+    n = len(set(win_cards[i]).intersection(cards[i]))
+    return 1 + sum(map(n_cards,range(i+1,i+n+1)))
 
 
 for i in range(len(lines)):
-    ans2 += score(i)
+    ans1 += score(i)
+    ans2 += n_cards(i)
 
 
 ###########
