@@ -8,7 +8,7 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.12"
 q = "^2.6"
 black = "^21.12b0"
 requests = "^2.26.0"
@@ -16,6 +16,7 @@ advent-of-code-data = "2.0.1"
 pytest = "^6.2.5"
 ortools = "^9.2.9972"
 z3-solver = "^4.11.2.0"
+networkx = "^3.2.1"
 
 [tool.poetry.dev-dependencies]
 

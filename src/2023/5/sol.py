@@ -128,8 +128,8 @@ ans2_correct = None
 while ans2_correct is None:
     seed = get_seed(i)
     j = 0
-    while j < len(seeds):
-        if seeds[j] <= seed < seeds[j] + seeds[j + 1]:
+    for s0, n in itertools.batched(seeds, 2):
+        if s0 <= seed < s0 + n:
             ans2_correct = i
             break
         j += 2
@@ -141,16 +141,15 @@ print(ans2_correct)
 i = 0
 best_range = [0, 0]
 ans2 = 100000000000000000000000000000000
-while i < len(seeds):
-    seed = seeds[i]
-    n = seeds[i + 1]
+for seed, n in itertools.batched(seeds, 2):
     sq = int(math.sqrt(n))
-    while seed < seeds[i] + n:
-        l = location(seed)
+    step = seed
+    while step < seed + n:
+        l = location(step)
         if l < ans2:
-            best_range = (max(seed - sq, seeds[i]), min(seed + sq, seeds[i] + n))
+            best_range = (max(step - sq, seed), min(step + sq, seed + n))
             ans2 = l
-        seed += sq
+        step += sq
 
     i += 2
 for seed in range(best_range[0], best_range[1]):
