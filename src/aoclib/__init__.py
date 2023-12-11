@@ -33,7 +33,7 @@ def get_grid(lines, f=None, sep=None):
 
 def print_grid(g):
     for l in transpose(g):
-        print(l)
+        print("".join(l))
         # print("".join(map(lambda n: "X" if n > 10 else str(n % 10), l)))
     print()
 
