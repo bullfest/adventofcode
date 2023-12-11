@@ -3,6 +3,7 @@ import sys
 import re
 
 import aoclib
+from aoclib import *
 import q
 import itertools as it
 import math
@@ -52,6 +53,15 @@ set_max_y(len(lines[0]))
 ############
 # SOLUTION #
 ############
+sections = get_sections(lines)
+
+for sect in sections[0:]:
+    for l in sect:
+        pass
+
+for l in lines:
+    pass
+
 
 
 ###########
