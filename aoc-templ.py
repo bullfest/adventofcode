@@ -33,45 +33,49 @@ def flip_x_y():
 year = <<YEAR>>
 day = <<DAY>>
 
-if len(sys.argv) > 1:
-    filename = sys.argv[1]
-    with open(filename) as file:
-        lines = [l.strip('\n') for l in file]
-else:
-    filename = None
-    lines = aocd.get_data(year=year, day=day).split("\n")
 
-print("len(lines)", len(lines))
-print("len(lines[0])", len(lines[0]))
+def run():
+    if len(sys.argv) > 1:
+        filename = sys.argv[1]
+        with open(filename) as file:
+            lines = [l.strip('\n') for l in file]
+    else:
+        filename = None
+        lines = aocd.get_data(year=year, day=day).split("\n")
 
-ans1 = 0
-ans2 = 0
+    print("len(lines)", len(lines))
+    print("len(lines[0])", len(lines[0]))
 
-set_max_x(len(lines))
-set_max_y(len(lines[0]))
+    ans1 = 0
+    ans2 = 0
 
-############
-# SOLUTION #
-############
-sections = get_sections(lines)
+    set_max_x(len(lines))
+    set_max_y(len(lines[0]))
 
-for sect in sections[0:]:
-    for l in sect:
+    ############
+    # SOLUTION #
+    ############
+    sections = get_sections(lines)
+
+    for sect in sections[0:]:
+        for l in sect:
+            pass
+
+    for l in lines:
         pass
 
-for l in lines:
-    pass
+    ###########
+    print("1:", ans1)
+    print("2:", ans2)
+
+    if filename is None:
+        submit = input("submit?")
+        if 'y' in submit.lower():
+            if ans1 != 0:
+                aocd.submit(ans1, year=year, day=day, part="a")
+            if ans2 != 0:
+                aocd.submit(ans2, year=year, day=day, part="b")
 
 
-
-###########
-print("1:", ans1)
-print("2:", ans2)
-
-if filename is None:
-    submit = input("submit?")
-    if 'y' in submit.lower():
-        if ans1 != 0:
-            aocd.submit(ans1, year=year, day=day, part="a")
-        if ans2 != 0:
-            aocd.submit(ans2, year=year, day=day, part="b")
+if __name__ == "__main__":
+    run()
