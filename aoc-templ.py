@@ -13,6 +13,16 @@ from dataclasses import dataclass
 from collections import defaultdict
 
 
+def set_min_x(n: int):
+    global min_x
+    min_x = aoclib.min_x = n
+
+
+def set_min_y(n: int):
+    global min_y
+    min_y = aoclib.min_y = n
+
+
 def set_max_x(n: int):
     global max_x
     max_x = aoclib.max_x = n
@@ -30,8 +40,8 @@ def flip_x_y():
     aoclib.max_y = max_y
 
 
-year = <<YEAR>>
-day = <<DAY>>
+year = "<<YEAR>>"
+day = "<<DAY>>"
 
 
 def run():
